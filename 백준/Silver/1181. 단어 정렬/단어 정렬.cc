@@ -1,22 +1,17 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <set>
 #include <algorithm>
 using namespace std;
 
-bool cmp(const string& a, const string& b) {
-    if (a.size() == b.size())
-        return a < b;
-    return a.size() < b.size();
-}
+
 
 int main() {
     int N;
     cin >> N;
 
     set<string> word_set; 
-    vector<string> words;
+    vector<pair<int,string>> words;
 
     for (int i = 0; i < N; ++i) {
         string word;
@@ -25,13 +20,13 @@ int main() {
     }
 
     for (const auto& word : word_set) {
-        words.push_back(word);
+        words.emplace_back(word.size(),word);
     }
 
-    sort(words.begin(), words.end(), cmp);
+    sort(words.begin(), words.end());
 
-    for (const auto& word : words) {
-        cout << word << endl;
+    for (auto& word : words) {
+        cout << word.second << endl;
     }
 
     return 0;
