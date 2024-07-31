@@ -1,28 +1,26 @@
 #include <iostream>
 #include <string>
-#include <cmath>
 using namespace std;
 
-
-long long M = 1234567891;
+const long long M = 1234567891;
+const int r = 31;
 int L = 0;
 string S;
 
 long long hashing() {
+    long long value = 0;
+    long long r_power = 1;
 
-	long long value = 0;
+    for (int i = 0; i < L; ++i) {
+        value = (value + (S[i] - 'a' + 1) * r_power % M) % M;
+        r_power = (r_power * r) % M;
+    }
 
-	for (int i = 0; i < L; ++i) {
-		value += pow(31, i) * (S[i] - 'a' + 1);
-	}
-	return value % M;
+    return value;
 }
 
-
-
 int main() {
-
-	cin >> L >> S;
-
-	cout << hashing();
+    cin >> L >> S;
+    cout << hashing() << endl;
+    return 0;
 }
